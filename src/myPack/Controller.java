@@ -16,6 +16,7 @@ public class Controller {
 
     private static File file;
     private MPlayer m ;
+    private boolean isfullscreen = false;
 
     @FXML
     MenuItem open = new MenuItem();
@@ -36,7 +37,7 @@ public class Controller {
     @FXML
     AnchorPane FullAnchor = new AnchorPane();
     public void screen(MouseEvent e){
-        if(e.getClickCount() == 2) {
+        if(e.getClickCount() == 2 && is !fullscreen) {
             MediaView fullm = m.getMv();
             fullm.setPreserveRatio(false);
             fullm.fitWidthProperty().bind(FullAnchor.widthProperty());
@@ -44,6 +45,10 @@ public class Controller {
             FullAnchor.getChildren().add(fullm);
             Main.pstage.setScene(new Scene(FullAnchor));
             Main.pstage.setFullScreen(true);
+           fullscreen = true;
+        }else{
+            fullscreen=false;
+            Main.pstage.setFullScreen(false);
         }
     }
 
