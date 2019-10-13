@@ -37,7 +37,7 @@ public class Controller {
     @FXML
     AnchorPane FullAnchor = new AnchorPane();
     public void screen(MouseEvent e){
-        if(e.getClickCount() == 2 && is !fullscreen) {
+        if(e.getClickCount() == 2 && !isfullscreen) {
             MediaView fullm = m.getMv();
             fullm.setPreserveRatio(false);
             fullm.fitWidthProperty().bind(FullAnchor.widthProperty());
@@ -45,7 +45,10 @@ public class Controller {
             FullAnchor.getChildren().add(fullm);
             Main.pstage.setScene(new Scene(FullAnchor));
             Main.pstage.setFullScreen(true);
-           fullscreen = true;
+           isfullscreen = true;
+        }else{
+            Main.pstage.setFullScreen(false);
+            isfullscreen=false;
         }
     }
 
