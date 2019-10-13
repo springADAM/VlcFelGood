@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         pstage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        primaryStage.setTitle("VlcFelGOod");
+        primaryStage.setTitle("Vlc Fel Good");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
