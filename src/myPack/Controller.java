@@ -46,9 +46,6 @@ public class Controller {
             Main.pstage.setScene(new Scene(FullAnchor));
             Main.pstage.setFullScreen(true);
            fullscreen = true;
-        }else{
-            fullscreen=false;
-            Main.pstage.setFullScreen(false);
         }
     }
 
