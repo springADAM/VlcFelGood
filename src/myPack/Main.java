@@ -8,14 +8,17 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static Stage pstage;
+    static Stage pstage;
+    static Scene pscene;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         pstage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         primaryStage.setTitle("VlcFelGOod");
-        primaryStage.setScene(new Scene(root));
+        Scene s = new Scene(root);
+        pscene = s;
+        primaryStage.setScene(s);
         primaryStage.show();
     }
 
