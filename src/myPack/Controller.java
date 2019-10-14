@@ -55,8 +55,8 @@ public class Controller implements Initializable {
             file = fileChooser.showOpenDialog(new Stage());
             m.getMediaPlayer().stop();
             m = new MPlayer(file, pContainer);
-        } catch (NullPointerException | MalformedURLException ignored) {
-
+        } catch (NullPointerException | MalformedURLException e) {
+            m = new MPlayer(file,pContainer);
         }
     }
 
