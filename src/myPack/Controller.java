@@ -2,6 +2,7 @@ package myPack;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,12 +25,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controller  {
 
     @FXML
     public MenuItem open = new MenuItem();
     public Button pause = new Button();
-    public Button speed = new Button();
 
     private static File file;
     private MPlayer m;
@@ -39,6 +39,7 @@ public class Controller implements Initializable {
     @FXML  Label startTime = new Label();
     @FXML Label endTime = new Label();
 
+  @FXML  MenuItem speed = new MenuItem();
 
     @FXML
     public Slider time = new Slider();
@@ -54,9 +55,10 @@ public class Controller implements Initializable {
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Video files (*.mp4)", "*.mp4"), new FileChooser.ExtensionFilter("Audio files (*.mp3)", "*.mp3"));
             file = fileChooser.showOpenDialog(new Stage());
             m.getMediaPlayer().stop();
-            m = new MPlayer(file, pContainer);
+            m = new MPlayer(file, pContainer,time);
+            slide();
         } catch (NullPointerException | MalformedURLException e) {
-            m = new MPlayer(file, pContainer);
+            m = new MPlayer(file, pContainer,time);
         }
     }
 
@@ -109,21 +111,28 @@ public class Controller implements Initializable {
             else { m.getMediaPlayer().play(); playerstate = true;}}catch (NullPointerException e){}
     }
 
-    @FXML public void speed () {
+    @FXML public void fst () {
+        m.getMediaPlayer().setRate(1.0);
+    }
+    @FXML public void fster () {
         m.getMediaPlayer().setRate(1.5);
     }
 
-    @Override
-    public void initialize (URL location, ResourceBundle resources){
-        time.valueProperty().addListener(ov -> {
-            if (time.isPressed()) {
-                m.getMediaPlayer().seek(m.getMediaPlayer().getMedia().getDuration().multiply(time.getValue() / 100));
-            }
-        });
 
 
-    }
 
+
+
+    public void slide() {
+
+          time.valueProperty().addListener(ov -> {
+           if (time.isPressed()) {
+             m.getMediaPlayer().seek(m.getMediaPlayer().getMedia().getDuration().multiply(time.getValue() / 100));
+       }
+
+
+
+    });}
     @FXML
     public void changevol(){
         {
