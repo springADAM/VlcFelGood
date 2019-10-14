@@ -27,8 +27,8 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @FXML
-    public MenuItem open = new MenuItem();
     public Button pause = new Button();
+    public MenuItem open = new MenuItem();
     public Button speed = new Button();
 
     private static File file;
