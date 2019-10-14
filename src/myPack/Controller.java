@@ -1,9 +1,15 @@
 package myPack;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Slider;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -11,21 +17,36 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
+
+    @FXML
+    public MenuItem open = new MenuItem();
+    public Button pause = new Button();
+    public Button speed = new Button();
 
     private static File file;
     private MPlayer m;
     private boolean isfullscreen = false;
+    private boolean playerstate =false;
+
+    @FXML  Label startTime = new Label();
+    @FXML Label endTime = new Label();
+
 
     @FXML
-    MenuItem open = new MenuItem();
+    public Slider time = new Slider();
+    public Slider vol = new Slider();
     @FXML
     AnchorPane pContainer = new AnchorPane();
+    java.time.Duration strtTime;
+
 
     public void openFile() throws MalformedURLException {
         try {
@@ -81,5 +102,38 @@ public class Controller {
         Main.pstage.setScene(Main.pscene);
     }
 
+    @FXML
+    public void pausePlay(){
+        try{
+            if(playerstate) {m.getMediaPlayer().pause(); playerstate =false;}
+            else { m.getMediaPlayer().play(); playerstate = true;}}catch (NullPointerException e){}
+    }
 
+    @FXML public void speed () {
+        m.getMediaPlayer().setRate(1.5);
+    }
+
+    @Override
+    public void initialize (URL location, ResourceBundle resources){
+        time.valueProperty().addListener(ov -> {
+            if (time.isPressed()) {
+                m.getMediaPlayer().seek(m.getMediaPlayer().getMedia().getDuration().multiply(time.getValue() / 100));
+            }
+        });
+
+
+    }
+
+    @FXML
+    public void changevol(){
+        {
+            vol.valueProperty().addListener(new InvalidationListener() {
+                public void invalidated(Observable ov) {
+                    if (vol.isPressed()) {
+                        m.getMediaPlayer().setVolume(vol.getValue() / 100);
+                    }
+                }
+            });
+
+        }}
 }
