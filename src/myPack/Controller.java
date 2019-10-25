@@ -3,13 +3,12 @@ package myPack;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -34,7 +33,7 @@ public class Controller  {
     private static File file;
     private MPlayer m;
     private boolean isfullscreen = false;
-    private boolean playerstate =false;
+    private boolean playerstate =true;
 
     @FXML  Label startTime = new Label();
     @FXML Label endTime = new Label();
@@ -52,6 +51,18 @@ public class Controller  {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Video files (*.mp4)", "*.mp4"), new FileChooser.ExtensionFilter("Audio files (*.mp3)", "*.mp3"));
             file = fileChooser.showOpenDialog(new Stage());
+            MenuItem item = new MenuItem();
+            item.setText(file.getPath());
+            item.setOnAction(event -> {
+                m.getMediaPlayer().stop();
+                try {
+                    m = new MPlayer(file, pContainer,time,startTime,endTime);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                Main.pstage.setTitle(file.getName());
+            });
+            openRecently.getItems().add(item);
             m.getMediaPlayer().stop();
             m = new MPlayer(file, pContainer,time,startTime,endTime);
             Main.pstage.setTitle(file.getName());
@@ -64,6 +75,9 @@ public class Controller  {
     @FXML
     AnchorPane FullAnchor = new AnchorPane();
     Scene temp = new Scene(FullAnchor);
+
+    @FXML
+    Menu openRecently = new Menu();
 
     public void screen(MouseEvent event) {
         System.out.println(isfullscreen);

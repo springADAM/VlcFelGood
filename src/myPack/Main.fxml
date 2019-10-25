@@ -13,14 +13,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="496.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPack.Controller">
+<VBox prefHeight="496.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPack.Controller">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
             <MenuItem fx:id="open" mnemonicParsing="false" onAction="#openFile" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
+            <Menu fx:id="openRecently" mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Close" />
             <SeparatorMenuItem mnemonicParsing="false" />
@@ -67,7 +67,7 @@
         </Pane>
         <MenuButton mnemonicParsing="false" text="speed">
           <items>
-            <MenuItem  mnemonicParsing="false" onAction="#speed" text="*1.0" />
+            <MenuItem mnemonicParsing="false" onAction="#speed" text="*1.0" />
             <MenuItem mnemonicParsing="false" text="*1.5" />
           </items>
         </MenuButton>
