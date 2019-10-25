@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="VlcFelGood:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/VlcFelGood_jar</output-path>
+    <root id="archive" name="VlcFelGood.jar">
+      <element id="module-output" name="VlcFelGood" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

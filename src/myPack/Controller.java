@@ -21,9 +21,9 @@ public class Controller {
     public MenuItem open = new MenuItem();
 
     private static File file;
-    private MPlayer m;
+    static MPlayer m;
     private boolean isfullscreen = false;
-    private boolean playerstate = true;
+     static boolean playerstate = true;
 
     @FXML
     Label startTime = new Label();
@@ -84,6 +84,7 @@ public class Controller {
                     backtonormal();
                     isfullscreen = false;
                 }
+                if(e.getCode() ==KeyCode.SPACE)pausePlay();
             });
             Main.pstage.setScene(temp);
             Main.pstage.setFullScreen(true);
