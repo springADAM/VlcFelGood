@@ -1,34 +1,23 @@
 package myPack;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 
 public class Controller  {
 
     @FXML
     public Button pause = new Button();
     public MenuItem open = new MenuItem();
-    public Button speed = new Button();
 
     private static File file;
     private MPlayer m;
@@ -74,13 +63,12 @@ public class Controller  {
 
     @FXML
     AnchorPane FullAnchor = new AnchorPane();
-    Scene temp = new Scene(FullAnchor);
+    private Scene temp = new Scene(FullAnchor);
 
     @FXML
     Menu openRecently = new Menu();
 
     public void screen(MouseEvent event) {
-        System.out.println(isfullscreen);
         if (event.getClickCount() == 2 && !isfullscreen) {
             MediaView fullm = m.getMv();
             fullm.setPreserveRatio(false);
@@ -99,8 +87,7 @@ public class Controller  {
             isfullscreen = true;
             event.consume();
         } else {
-            if (event.getClickCount() == 2 && isfullscreen) {
-                System.out.println("triggered");
+            if (event.getClickCount() == 2 ) {
                 backtonormal();
                 isfullscreen = false;
             }
@@ -109,7 +96,7 @@ public class Controller  {
 
 
 
-    public void backtonormal() {
+    private void backtonormal() {
         m.getMv().fitWidthProperty().bind(pContainer.widthProperty());
         m.getMv().fitHeightProperty().bind(pContainer.heightProperty());
         pContainer.getChildren().removeAll();
@@ -121,7 +108,7 @@ public class Controller  {
     public void pausePlay(){
         try{
             if(playerstate) {m.getMediaPlayer().pause(); playerstate =false;}
-            else { m.getMediaPlayer().play(); playerstate = true;}}catch (NullPointerException e){}
+            else { m.getMediaPlayer().play(); playerstate = true;}}catch (NullPointerException ignored){}
     }
 
     @FXML public void speed () {
@@ -133,11 +120,9 @@ public class Controller  {
     @FXML
     public void changevol(){
         {
-            vol.valueProperty().addListener(new InvalidationListener() {
-                public void invalidated(Observable ov) {
-                    if (vol.isPressed()) {
-                        m.getMediaPlayer().setVolume(vol.getValue() / 100);
-                    }
+            vol.valueProperty().addListener(ov -> {
+                if (vol.isPressed()) {
+                    m.getMediaPlayer().setVolume(vol.getValue() / 100);
                 }
             });
 

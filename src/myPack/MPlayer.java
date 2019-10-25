@@ -6,7 +6,6 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -34,6 +33,7 @@ class MPlayer {
             pContainer.getChildren().add(mv);
             mediaPlayer.setAutoPlay(true);
         } catch (NullPointerException ignored) {}
+        assert mediaPlayer != null;
         mediaPlayer.currentTimeProperty().addListener(ov -> {
             try {
                 int ints = (int) mediaPlayer.getCurrentTime().toSeconds();
@@ -62,12 +62,12 @@ class MPlayer {
 
     }
 
-    protected void updatesValues(Slider time) {
+    private void updatesValues(Slider time) {
         Platform.runLater(() -> time.setValue(mediaPlayer.getCurrentTime().toMillis() /
                 mediaPlayer.getTotalDuration().toMillis() * 100));
     }
 
-    public MediaView getMv() {
+    MediaView getMv() {
         return mv;
     }
 
