@@ -13,49 +13,31 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="496.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPack.Controller">
+<VBox prefHeight="496.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPack.Controller">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
             <MenuItem fx:id="open" mnemonicParsing="false" onAction="#openFile" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
+            <Menu fx:id="openRecently" mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Close" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Preferences…" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
+        <Menu mnemonicParsing="false" text="About" />
       </menus>
     </MenuBar>
     <AnchorPane fx:id="pContainer" onMouseClicked="#screen" prefWidth="639.0" VBox.vgrow="ALWAYS" />
     <HBox prefHeight="35.0" prefWidth="640.0">
       <children>
-        <Label fx:id="startTime" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="107.0" textAlignment="CENTER" />
+        <Label fx:id="playTime" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="107.0" text="--:--" textAlignment="CENTER" />
         <Slider fx:id="time" prefHeight="35.0" prefWidth="506.0" />
-        <Label fx:id="endTime" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="113.0" textAlignment="CENTER" />
+        <Label fx:id="endTime" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="113.0" text="--:--" textAlignment="CENTER" />
       </children>
     </HBox>
     <HBox alignment="CENTER" prefHeight="80.0" prefWidth="640.0">
@@ -67,8 +49,10 @@
             </Pane>
             <MenuButton mnemonicParsing="false" text="speed">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#fst" text="*1.0" />
-                <MenuItem mnemonicParsing="false" onAction="#fster" text="*1.5" />
+                <MenuItem mnemonicParsing="false" onAction="#slwer" text="*0.5" />
+                <MenuItem mnemonicParsing="false" onAction="#slw" text="*0.75" />
+                  <MenuItem mnemonicParsing="false" onAction="#fst" text="*1.0" />
+                  <MenuItem mnemonicParsing="false" onAction="#fster" text="*1.5" />
               </items>
             </MenuButton>
         <Pane prefHeight="200.0" prefWidth="200.0">
