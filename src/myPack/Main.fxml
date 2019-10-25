@@ -45,9 +45,9 @@
     </HBox>
     <HBox alignment="CENTER" prefHeight="80.0" prefWidth="640.0">
         <Pane layoutX="302.0" layoutY="10.0" prefHeight="80.0" prefWidth="186.0">
-            <Button fx:id="pause" layoutX="55.0" layoutY="17.0" mnemonicParsing="false" onAction="#pausePlay" prefHeight="45.0" prefWidth="79.0" text="pause" />
+            <Button fx:id="pause" layoutX="55.0" layoutY="17.0" mnemonicParsing="false" onAction="#pausePlay" prefHeight="45.0" prefWidth="79.0" style="-fx-background-color: white;" text="pause" />
         </Pane>
-        <MenuButton mnemonicParsing="false" text="speed">
+        <MenuButton mnemonicParsing="false" style="-fx-background-color: white;" text="speed">
             <items>
                 <MenuItem mnemonicParsing="false" onAction="#slower" text="*0.5" />
                 <MenuItem mnemonicParsing="false" onAction="#slow" text="*0.75" />
