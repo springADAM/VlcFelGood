@@ -38,11 +38,17 @@ class MPlayer {
         mediaPlayer.currentTimeProperty().addListener(ov -> {
             try {
                 int ints = (int) mediaPlayer.getCurrentTime().toSeconds();
+                int inte = (int) mediaPlayer.getTotalDuration().toSeconds() - ints;
                 String s = String.format("%06d", ints);
                 DateFormat sdf = new SimpleDateFormat("hhmmss");
                 Date parsedate = sdf.parse(s);
                 String format = new SimpleDateFormat("HH:mm:ss").format(parsedate);
                 start.textProperty().bind(Bindings.createStringBinding(() -> format));
+                String s1 = String.format("%06d", inte);
+                DateFormat sdf1 = new SimpleDateFormat("hhmmss");
+                Date parsedate1 = sdf1.parse(s1);
+                String format1 = new SimpleDateFormat("HH:mm:ss").format(parsedate1);
+                end.textProperty().bind(Bindings.createStringBinding(() -> format1));
 
             } catch (ParseException e) {
                 e.printStackTrace();

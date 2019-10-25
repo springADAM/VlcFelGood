@@ -67,8 +67,8 @@
         </Pane>
         <MenuButton mnemonicParsing="false" text="speed">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#speed" text="*1.0" />
-            <MenuItem mnemonicParsing="false" text="*1.5" />
+            <MenuItem mnemonicParsing="false" onAction="#normal" text="*1.0" />
+            <MenuItem mnemonicParsing="false" onAction="#speed" text="*1.5" />
           </items>
         </MenuButton>
         <Pane prefHeight="200.0" prefWidth="200.0">

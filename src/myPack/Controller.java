@@ -127,7 +127,7 @@ public class Controller  {
     @FXML public void speed () {
         m.getMediaPlayer().setRate(1.5);
     }
-
+    @FXML public void normal(){ m.getMediaPlayer().setRate(1.0);}
 
 
     @FXML
