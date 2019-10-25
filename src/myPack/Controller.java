@@ -24,7 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controller  {
 
     @FXML
     public Button pause = new Button();
@@ -54,9 +54,11 @@ public class Controller implements Initializable {
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Video files (*.mp4)", "*.mp4"), new FileChooser.ExtensionFilter("Audio files (*.mp3)", "*.mp3"));
             file = fileChooser.showOpenDialog(new Stage());
             m.getMediaPlayer().stop();
-            m = new MPlayer(file, pContainer);
+            m = new MPlayer(file, pContainer,time,startTime,endTime);
+            Main.pstage.setTitle(file.getName());
         } catch (NullPointerException | MalformedURLException e) {
-            m = new MPlayer(file,pContainer);
+            m = new MPlayer(file,pContainer,time,startTime,endTime);
+            Main.pstage.setTitle(file.getName());
         }
     }
 
@@ -113,16 +115,7 @@ public class Controller implements Initializable {
         m.getMediaPlayer().setRate(1.5);
     }
 
-    @Override
-    public void initialize (URL location, ResourceBundle resources){
-        time.valueProperty().addListener(ov -> {
-            if (time.isPressed()) {
-                m.getMediaPlayer().seek(m.getMediaPlayer().getMedia().getDuration().multiply(time.getValue() / 100));
-            }
-        });
 
-
-    }
 
     @FXML
     public void changevol(){
