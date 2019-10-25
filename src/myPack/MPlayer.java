@@ -6,6 +6,7 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -16,7 +17,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 class MPlayer {
     private MediaPlayer mediaPlayer;
@@ -33,8 +33,7 @@ class MPlayer {
             pContainer.getChildren().removeAll();
             pContainer.getChildren().add(mv);
             mediaPlayer.setAutoPlay(true);
-        } catch (NullPointerException ignored) {
-        }
+        } catch (NullPointerException ignored) {}
         mediaPlayer.currentTimeProperty().addListener(ov -> {
             try {
                 int ints = (int) mediaPlayer.getCurrentTime().toSeconds();

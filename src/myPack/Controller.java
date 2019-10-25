@@ -60,7 +60,7 @@ public class Controller  {
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
-                Main.pstage.setTitle(file.getName());
+                Main.pstage.setTitle(file.getName()+" - VLC fel good");
             });
             openRecently.getItems().add(item);
             m.getMediaPlayer().stop();
@@ -68,7 +68,7 @@ public class Controller  {
             Main.pstage.setTitle(file.getName());
         } catch (NullPointerException | MalformedURLException e) {
             m = new MPlayer(file,pContainer,time,startTime,endTime);
-            Main.pstage.setTitle(file.getName());
+            Main.pstage.setTitle(file.getName()+" - VLC fel good");
         }
     }
 
