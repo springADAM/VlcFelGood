@@ -25,16 +25,16 @@ class MPlayer {
         pContainer.getChildren().removeAll();
         pContainer.getChildren().add(mv);
         mediaPlayer.setAutoPlay(true);}catch(NullPointerException ignored){}
-        mediaPlayer.currentTimeProperty().addListener(ov -> updatesValues(time));
+        mediaPlayer.currentTimeProperty().addListener(ov -> {
+            start.textProperty().bind(Bindings.createStringBinding(() ->String.valueOf(mediaPlayer.getCurrentTime().toMinutes())));
+            updatesValues(time);});
         time.valueProperty().addListener(ov -> {
             if (time.isPressed()) {
                 mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(time.getValue() / 100));
             }
         });
-        System.out.println(mediaPlayer.currentTimeProperty());
-        start.textProperty().bind(Bindings.createStringBinding(() -> String.valueOf(Bindings.createDoubleBinding(
-                () -> mediaPlayer.getTotalDuration().toSeconds(),
-                mediaPlayer.totalDurationProperty()))));
+        //System.out.println(mediaPlayer.currentTimeProperty());
+       //
     }
 
     protected void updatesValues(Slider time)

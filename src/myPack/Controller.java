@@ -45,7 +45,6 @@ public class Controller  {
     public Slider vol = new Slider();
     @FXML
     AnchorPane pContainer = new AnchorPane();
-    java.time.Duration strtTime;
 
 
     public void openFile() throws MalformedURLException {
