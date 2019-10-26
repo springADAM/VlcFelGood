@@ -22,7 +22,7 @@
             <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" text="About VLCfelGood" onAction="#about" />
+            <MenuItem mnemonicParsing="false" text="About VlcFelGood" onAction="#about" />
         </Menu>
     </MenuBar>
     <AnchorPane fx:id="pContainer" onMouseClicked="#screen" prefWidth="639.0" style="-fx-background-color: #6d6d6d;" VBox.vgrow="ALWAYS" />
