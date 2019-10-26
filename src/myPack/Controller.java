@@ -10,6 +10,7 @@ import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.File;
 import java.net.MalformedURLException;
 
@@ -119,6 +120,10 @@ public class Controller {
             }
         } catch (NullPointerException ignored) {
         }
+    }
+    @FXML
+    void about(){
+        JOptionPane.showMessageDialog(null,"Made with love and Java \n          by RaniAdam");
     }
 
     @FXML
