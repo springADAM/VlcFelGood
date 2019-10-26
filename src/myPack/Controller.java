@@ -53,8 +53,9 @@ public class Controller implements Initializable {
             m = new MPlayer(file, pContainer, time, startTime, endTime);
             Main.pstage.setTitle(file.getName());
         } catch (NullPointerException e) {
+            try{
             m = new MPlayer(file, pContainer, time, startTime, endTime);
-            Main.pstage.setTitle(file.getName() + " - VLC fel good");
+            Main.pstage.setTitle(file.getName() + " - VLC fel good");}catch(NullPointerException ignored){}
         }
     }
 
@@ -184,16 +185,16 @@ public class Controller implements Initializable {
         });
     }
 
-    void addToRecently(File file) {
+    private void addToRecently(File file) {
         MenuItem item = new MenuItem();
         item.setText(file.getPath());
         item.setOnAction(event -> {
             m.getMediaPlayer().stop();
-
             m = new MPlayer(file, pContainer, time, startTime, endTime);
-
             Main.pstage.setTitle(file.getName() + " - VLC fel good");
         });
         openRecently.getItems().add(item);
+        Main.pstage.setTitle(file.getName() + " - VLC fel good");
+
     }
 }
