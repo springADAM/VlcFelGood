@@ -21,7 +21,7 @@ class MPlayer {
     private MediaPlayer mediaPlayer;
     private MediaView mv;
 
-    MPlayer(File file, AnchorPane pContainer, Slider time, Label start, Label end) throws MalformedURLException {
+    MPlayer(File file, AnchorPane pContainer, Slider time, Label start, Label end) {
         try {
             Media media = new Media(file.toURI().toURL().toExternalForm());
             mediaPlayer = new MediaPlayer(media);
@@ -32,7 +32,7 @@ class MPlayer {
             pContainer.getChildren().removeAll();
             pContainer.getChildren().add(mv);
             mediaPlayer.setAutoPlay(true);
-        } catch (NullPointerException ignored) {}
+        } catch (NullPointerException | MalformedURLException ignored) {}
         assert mediaPlayer != null;
         mediaPlayer.currentTimeProperty().addListener(ov -> {
             try {

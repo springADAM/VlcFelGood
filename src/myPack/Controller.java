@@ -1,10 +1,13 @@
 package myPack;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
@@ -12,10 +15,11 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.File;
-import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class Controller {
+public class Controller implements Initializable {
 
     @FXML
     public Button pause = new Button();
@@ -24,7 +28,7 @@ public class Controller {
     private static File file;
     static MPlayer m;
     private boolean isfullscreen = false;
-     static boolean playerstate = true;
+    static boolean playerstate = true;
 
     @FXML
     Label startTime = new Label();
@@ -39,27 +43,16 @@ public class Controller {
     AnchorPane pContainer = new AnchorPane();
 
 
-    public void openFile() throws MalformedURLException {
+    public void openFile() {
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Video files (*.mp4)", "*.mp4"), new FileChooser.ExtensionFilter("Audio files (*.mp3)", "*.mp3"));
             file = fileChooser.showOpenDialog(new Stage());
-            MenuItem item = new MenuItem();
-            item.setText(file.getPath());
-            item.setOnAction(event -> {
-                m.getMediaPlayer().stop();
-                try {
-                    m = new MPlayer(file, pContainer, time, startTime, endTime);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-                Main.pstage.setTitle(file.getName() + " - VLC fel good");
-            });
-            openRecently.getItems().add(item);
+            addToRecently(file);
             m.getMediaPlayer().stop();
             m = new MPlayer(file, pContainer, time, startTime, endTime);
             Main.pstage.setTitle(file.getName());
-        } catch (NullPointerException | MalformedURLException e) {
+        } catch (NullPointerException e) {
             m = new MPlayer(file, pContainer, time, startTime, endTime);
             Main.pstage.setTitle(file.getName() + " - VLC fel good");
         }
@@ -85,7 +78,7 @@ public class Controller {
                     backtonormal();
                     isfullscreen = false;
                 }
-                if(e.getCode() ==KeyCode.SPACE)pausePlay();
+                if (e.getCode() == KeyCode.SPACE) pausePlay();
             });
             Main.pstage.setScene(temp);
             Main.pstage.setFullScreen(true);
@@ -121,20 +114,32 @@ public class Controller {
         } catch (NullPointerException ignored) {
         }
     }
+
     @FXML
-    void about(){
-        JOptionPane.showMessageDialog(null,"Made with love and Java \n          by RaniAdam");
+    void about() {
+        JOptionPane.showMessageDialog(null, "Made with love and Java \n          by RaniAdam");
     }
 
     @FXML
-     void speed() {m.getMediaPlayer().setRate(1.5);}
+    void speed() {
+        m.getMediaPlayer().setRate(1.5);
+    }
 
     @FXML
-     void normal() {m.getMediaPlayer().setRate(1.0);}
+    void normal() {
+        m.getMediaPlayer().setRate(1.0);
+    }
+
     @FXML
-    void slow(){m.getMediaPlayer().setRate(0.75);}
+    void slow() {
+        m.getMediaPlayer().setRate(0.75);
+    }
+
     @FXML
-    void slower(){m.getMediaPlayer().setRate(0.5);}
+    void slower() {
+        m.getMediaPlayer().setRate(0.5);
+    }
+
     @FXML
     void changevol() {
         {
@@ -150,5 +155,45 @@ public class Controller {
     @FXML
     void quit() {
         System.exit(0);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        pContainer.setOnDragOver(event -> {
+            if (event.getGestureSource() != pContainer && event.getDragboard().hasFiles()) {
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            }
+            event.consume();
+        });
+
+        pContainer.setOnDragDropped(e -> {
+            Dragboard db = e.getDragboard();
+            File f = db.getFiles().get(0);
+            try {
+                m.getMediaPlayer().stop();
+                addToRecently(f);
+                m = new MPlayer(f, pContainer, time, startTime, endTime);
+                e.setDropCompleted(true);
+                e.consume();
+            } catch (NullPointerException ex) {
+                addToRecently(f);
+                m = new MPlayer(f, pContainer, time, startTime, endTime);
+                e.setDropCompleted(true);
+                e.consume();
+            }
+        });
+    }
+
+    void addToRecently(File file) {
+        MenuItem item = new MenuItem();
+        item.setText(file.getPath());
+        item.setOnAction(event -> {
+            m.getMediaPlayer().stop();
+
+            m = new MPlayer(file, pContainer, time, startTime, endTime);
+
+            Main.pstage.setTitle(file.getName() + " - VLC fel good");
+        });
+        openRecently.getItems().add(item);
     }
 }
