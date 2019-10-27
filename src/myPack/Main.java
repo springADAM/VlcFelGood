@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -22,6 +23,7 @@ public class Main extends Application {
         s.setOnKeyPressed(e -> {
             if(e.getCode() == KeyCode.SPACE)pausePlay();
         });
+        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("ico.png")));
         primaryStage.setScene(s);
         primaryStage.show();
     }
@@ -30,7 +32,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    public void pausePlay() {
+    private void pausePlay() {
         try {
             if (Controller.playerstate) {
                 Controller.m.getMediaPlayer().pause();
