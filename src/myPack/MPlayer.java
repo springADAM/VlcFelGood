@@ -35,7 +35,7 @@ class MPlayer {
         } catch (NullPointerException | MalformedURLException ignored) {}
         assert mediaPlayer != null;
         mediaPlayer.currentTimeProperty().addListener(ov -> {
-            try {
+            try {//get timing of played video
                 int ints = (int) mediaPlayer.getCurrentTime().toSeconds();
                 int inte = (int) mediaPlayer.getTotalDuration().toSeconds() - ints;
                 String s = String.format("%06d", ints);
