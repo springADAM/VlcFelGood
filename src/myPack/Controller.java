@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 
 public class Controller implements Initializable {
-
+//Declaring buttons for video player app
     @FXML
     public Button pause = new Button();
     public MenuItem open = new MenuItem();
@@ -43,6 +43,7 @@ public class Controller implements Initializable {
 
 
     public void openFile() {
+//Main function that reads the file
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Video files (*.mp4)", "*.mp4"), new FileChooser.ExtensionFilter("Audio files (*.mp3)", "*.mp3"));
