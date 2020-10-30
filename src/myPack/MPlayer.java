@@ -20,7 +20,7 @@ import java.util.Date;
 class MPlayer {
     private MediaPlayer mediaPlayer;
     private MediaView mv;
-
+//Created mplayer object for reading the video file
     MPlayer(File file, AnchorPane pContainer, Slider time, Label start, Label end) {
         try {
             Media media = new Media(file.toURI().toURL().toExternalForm());
@@ -63,6 +63,7 @@ class MPlayer {
     }
 
     private void updatesValues(Slider time) {
+//Updating values of playing video file
         Platform.runLater(() -> time.setValue(mediaPlayer.getCurrentTime().toMillis() /
                 mediaPlayer.getTotalDuration().toMillis() * 100));
     }
