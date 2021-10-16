@@ -95,6 +95,7 @@ public class Controller implements Initializable {
 
 
     private void backtonormal() {
+        //exiting fullscreen
         m.getMv().fitWidthProperty().bind(pContainer.widthProperty());
         m.getMv().fitHeightProperty().bind(pContainer.heightProperty());
         pContainer.getChildren().removeAll();
