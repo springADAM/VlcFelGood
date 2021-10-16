@@ -18,10 +18,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 class MPlayer {
+    
     private MediaPlayer mediaPlayer;
     private MediaView mv;
 //Created mplayer object for reading the video file
     MPlayer(File file, AnchorPane pContainer, Slider time, Label start, Label end) {
+        System.out.println("creating object");
         try {
             Media media = new Media(file.toURI().toURL().toExternalForm());
             mediaPlayer = new MediaPlayer(media);
